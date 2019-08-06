@@ -35,6 +35,20 @@ public class WbListDaoImplTest extends AbstractPostgresIntegrationTest {
         Assert.assertNull(byId);
     }
 
+    @Test
+    public void saveListRecordParty() {
+        String id = "id";
+        WbListRecords listRecord = createListRecord(id);
+        listRecord.setShopId(null);
+        wbListDao.saveListRecord(listRecord);
+        WbListRecords byId = wbListDao.getById(id);
+        Assert.assertEquals(listRecord, byId);
+
+        wbListDao.removeRecord(listRecord);
+        byId = wbListDao.getById(id);
+        Assert.assertNull(byId);
+    }
+
     @NotNull
     private WbListRecords createListRecord(String id) {
         WbListRecords listRecord = new WbListRecords();
